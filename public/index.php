@@ -10,7 +10,7 @@ define('LARAVEL_START', microtime(true));
 | Check If The Application Is Under Maintenance
 |--------------------------------------------------------------------------
 */
-if (file_exists($maintenance = __DIR__.'/../proj_/storage/framework/maintenance.php')) {
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
@@ -19,19 +19,16 @@ if (file_exists($maintenance = __DIR__.'/../proj_/storage/framework/maintenance.
 | Register The Auto Loader
 |--------------------------------------------------------------------------
 */
-require __DIR__.'/../proj_/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
 | Run The Application
 |--------------------------------------------------------------------------
 */
-$app = require __DIR__.'/../proj_/bootstrap/app.php';
+$app = require __DIR__.'/../bootstrap/app.php';
 
-/* opsional tapi bagus: set public path ke public_html */
-if (method_exists($app, 'usePublicPath')) {
-    $app->usePublicPath(__DIR__);
-}
+// (Tidak perlu usePublicPath di setup standar)
 
 $kernel = $app->make(Kernel::class);
 
