@@ -544,10 +544,22 @@
 
             // Handle per page change
             $('#perPageSelect').on('change', function() {
-                const filter = $('.filter-category.active').data('filter') || 'all';
-                window.location.href = '{{ route('karyawans.index') }}?per_page=' + $(this).val() +
-                    '&search=' + $('#searchInput').val() +
-                    '&filter=' + filter;
+                const params = new URLSearchParams(window.location.search);
+                params.set('per_page', $(this).val());
+                // Pastikan filter, departemen_id, bagian_id, search tetap
+                if (!params.has('filter')) {
+                    params.set('filter', $('#filterStatus').val() || 'all');
+                }
+                if (!params.has('departemen_id')) {
+                    params.set('departemen_id', $('select[name="departemen_id"]').val() || '');
+                }
+                if (!params.has('bagian_id')) {
+                    params.set('bagian_id', $('select[name="bagian_id"]').val() || '');
+                }
+                if (!params.has('search')) {
+                    params.set('search', $('#searchInput').val() || '');
+                }
+                window.location.href = '{{ route('karyawans.index') }}?' + params.toString();
             });
 
             // Set search input value from URL
