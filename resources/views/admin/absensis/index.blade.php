@@ -288,10 +288,9 @@
                                     @php
                                         $totalJam = $absensi->total_jam;
                                         if (is_numeric($totalJam)) {
-                                            $jam = floor($totalJam / 3600);
-                                            $menit = floor(($totalJam % 3600) / 60);
-                                            $detik = $totalJam % 60;
-                                            echo "$jam jam $menit menit $detik detik";
+                                            $jam = floor($totalJam);
+                                            $menit = round(($totalJam - $jam) * 60);
+                                            echo $jam . ' jam ' . $menit . ' menit';
                                         } elseif (preg_match('/^(\d+):(\d+):(\d+)$/', $totalJam, $matches)) {
                                             $jam = intval($matches[1]);
                                             $menit = intval($matches[2]);

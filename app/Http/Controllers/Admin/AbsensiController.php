@@ -150,7 +150,7 @@ class AbsensiController extends Controller
         Absensi::create($request->all());
 
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('admin.absensis.index')
+    return redirect()->route('absensis.index')
             ->with('success', 'Absensi berhasil ditambahkan' . ($hariLibur ? ' (Hari Libur: ' . $hariLibur->nama_libur . ')' : ''));
     }
 
@@ -228,7 +228,7 @@ class AbsensiController extends Controller
         $absensi->update($request->all());
 
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('admin.absensis.index')
+    return redirect()->route('absensis.index')
             ->with('success', 'Absensi berhasil diperbarui' . ($hariLibur ? ' (Hari Libur: ' . $hariLibur->nama_libur . ')' : ''));
     }
 
@@ -242,7 +242,7 @@ class AbsensiController extends Controller
         $absensi->delete();
 
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('admin.absensis.index')
+    return redirect()->route('absensis.index')
             ->with('success', 'Absensi berhasil dihapus');
     }
 
@@ -305,7 +305,7 @@ class AbsensiController extends Controller
             // Proses data dan simpan ke database
             $processed = $this->processAttendanceData($attendanceData, $machine);
 
-            return redirect()->route('admin.absensis.index')->with('success', "Berhasil mengambil {$processed} data absensi dari mesin {$machine->nama}");
+            return redirect()->route('absensis.index')->with('success', "Berhasil mengambil {$processed} data absensi dari mesin {$machine->nama}");
         } catch (\Exception $e) {
             Log::error("Error fetching attendance data: " . $e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
@@ -750,7 +750,7 @@ class AbsensiController extends Controller
 
         $absensi->save();
 
-        return redirect()->route('admin.absensis.index')
+    return redirect()->route('absensis.index')
             ->with('success', 'Absensi pulang berhasil dicatat');
     }
 

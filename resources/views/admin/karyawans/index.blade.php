@@ -168,9 +168,13 @@
                                     <tr class="employee-row" data-department="{{ Str::slug($departemenName) }}">
                                         <td>{{ ++$counter }}</td>
                                         <td>
-                                            <img src="{{ asset('storage/karyawan/foto/' . $karyawan->foto_karyawan) }}"
+                                            @php
+                                                $fotoPath = $karyawan->foto_karyawan && file_exists(public_path('storage/karyawan/foto/' . $karyawan->foto_karyawan))
+                                                    ? asset('storage/karyawan/foto/' . $karyawan->foto_karyawan)
+                                                    : asset('images/default-avatar.png');
+                                            @endphp
+                                            <img src="{{ $fotoPath }}"
                                                 alt="{{ $karyawan->nama_karyawan }}"
-                                                onerror="this.src='{{ asset('storage/karyawan/foto/gambar.png') }}'"
                                                 class="img-thumbnail">
                                         </td>
                                         <td>{{ $karyawan->nik_karyawan }}</td>
