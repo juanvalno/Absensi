@@ -11,7 +11,7 @@
         <div class="card-header">
             <h3 class="card-title">Form Edit Karyawan</h3>
             <div class="card-tools">
-                <a href="{{ route('karyawans.index') }}" class="btn btn-default btn-sm">
+                <a href="{{ route('karyawans.index', request()->only(['departemen_id','bagian_id','filter','search','per_page'])) }}" class="btn btn-default btn-sm">
                     <i class="fas fa-arrow-left"></i> Kembali
                 </a>
             </div>
@@ -39,7 +39,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('karyawans.update', $karyawan->id) }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('karyawans.update', array_merge([$karyawan->id], request()->only(['departemen_id','bagian_id','filter','search','per_page']))) }}" method="POST" enctype="multipart/form-data"
                 id="karyawanForm">
                 @csrf
                 @method('PUT')

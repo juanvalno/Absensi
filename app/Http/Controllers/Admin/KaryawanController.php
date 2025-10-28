@@ -292,7 +292,14 @@ if ($request->hasFile('upload_ktp')) {
 
         $karyawan->update($data);
 
-        return redirect()->route('karyawans.index')
+        // Redirect ke index dengan query string filter yang sama (ambil dari referer jika ada)
+        $params = [];
+        foreach(['departemen_id','bagian_id','filter','search','per_page'] as $param) {
+            if ($request->filled($param)) {
+                $params[$param] = $request->input($param);
+            }
+        }
+        return redirect()->route('karyawans.index', $params)
             ->with('success', 'Karyawan berhasil diupdate');
     }
 
@@ -312,7 +319,9 @@ if ($request->hasFile('upload_ktp')) {
 
         $karyawan->delete();
 
-        return redirect()->route('karyawans.index')
+        // Ambil filter dari query string jika ada
+        $params = request()->only(['departemen_id','bagian_id','filter','search','per_page']);
+        return redirect()->route('karyawans.index', $params)
             ->with('success', 'Karyawan berhasil dihapus');
     }
 

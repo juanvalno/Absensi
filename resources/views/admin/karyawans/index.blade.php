@@ -217,7 +217,7 @@
                                             </a>
                                             @can_show('karyawans.edit')
                                             @if (!$karyawan->tahun_keluar)
-                                                <a href="{{ route('karyawans.edit', $karyawan) }}"
+                                                <a href="{{ route('karyawans.edit', [$karyawan, 'departemen_id' => request('departemen_id'), 'bagian_id' => request('bagian_id'), 'filter' => request('filter'), 'search' => request('search'), 'per_page' => request('per_page')] ) }}"
                                                     class="btn btn-sm btn-warning" data-toggle="tooltip"
                                                     title="Edit Karyawan">
                                                     <i class="fas fa-edit"></i>
@@ -228,7 +228,7 @@
                                                     title="Resign Karyawan">
                                                     <i class="fas fa-user-slash"></i>
                                                 </a>
-                                                <form action="{{ route('karyawans.destroy', $karyawan) }}" method="POST"
+                                                <form action="{{ route('karyawans.destroy', [$karyawan, 'departemen_id' => request('departemen_id'), 'bagian_id' => request('bagian_id'), 'filter' => request('filter'), 'search' => request('search'), 'per_page' => request('per_page')] ) }}" method="POST"
                                                     class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
